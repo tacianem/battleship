@@ -20,7 +20,11 @@ class Game():
                 print "Oops!  That was no valid number.  Try again..."
         self.board = Board (rows, cols)
         self.rounds = rounds
-        number_ships = random.randint(1,min(rows,cols))
+        reference = rows*cols
+        if (reference > 16):
+            number_ships = random.randint(reference/3,reference/2)
+        else:
+            number_ships = random.randint(1, min(rows, cols))
         self.board.set_ships (number_ships)
 
     """def is_victory(self):
@@ -61,12 +65,15 @@ class Game():
                     break
                 except ValueError:
                     print "Oops!  That was no valid number.  Try again..."
-             if (not self.board.positions[(guessRow-1, guessCol-1)].is_destroyed):
-                self.board.positions[(guessRow-1, guessCol-1)].resolve_shot()
-                self.board.print_board()
-                self.rounds -= 1
-             else:
-                print "Position already marked! KADOING!"
+             try:
+                 if (not self.board.positions[(guessRow-1, guessCol-1)].is_destroyed):
+                    self.board.positions[(guessRow-1, guessCol-1)].resolve_shot()
+                    self.board.print_board()
+                    self.rounds -= 1
+                 else:
+                    print "Position already marked! KADOING!"
+             except KeyError:
+                print "Position out of board! >.>"
           self.is_victory()
           self.print_end_message()
           self.print_new_game()
@@ -75,7 +82,7 @@ class Game():
            print self.end_message
 
     def print_new_game(self):
-        input = "BOO" #TRATAR!!!
+        input = "BOO"
         while(not (input == "Y" or input == "y" or input == "" or input == "N" or input == "n")):
              input = raw_input("Would you like to play again? ^_^ [Y/n]")
         if (input == "Y" or input == "y" or input == ""):
