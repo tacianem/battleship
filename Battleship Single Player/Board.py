@@ -41,7 +41,9 @@ class Board:
             return len(self.ships)
 
     def set_ships(self, n):
-        for i in range(n):
+        print n
+        i = 0
+        while i < n:
             direction = random.randint(1,2) #1 = vertical, 2 = horizontal
 
             initial_row = random.randint(0,self.rows-1)
@@ -56,7 +58,7 @@ class Board:
             count = 0
             row = initial_row
             col = initial_col
-            for i in range(tamanho):
+            for _ in range(tamanho):
                 if (not self.positions[(row,col)].is_battleship()):
                     count +=1
                 if (direction == 1): #take next position
@@ -64,18 +66,16 @@ class Board:
                 else:
                     col+=1
             if (count == tamanho):
-                i = 0
-                for i in range(tamanho):
+                for t in range(tamanho):
                     if (direction == 1): #take next position
-                        row=initial_row+i
+                        row=initial_row+t
                     else:
-                        col=initial_col+i
+                        col=initial_col+t
                     self.positions[(row,col)] = BattleshipCell(row, col)
                     aux.append(self.positions[(row,col)])
-                    i+=1
                 self.ships.append(Battleship(aux))
-            else:
-                i-=1
+                i+=1
+                print aux
 
 
 

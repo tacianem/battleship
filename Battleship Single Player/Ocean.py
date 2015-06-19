@@ -5,7 +5,7 @@ class Ocean(Cell):
 
     def __str__(self):
         if (self.is_destroyed):
-            return "A"
+            return "X"
         return  "O"
 
     def is_battleship(self):

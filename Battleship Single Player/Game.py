@@ -6,7 +6,7 @@ import random
 class Game():
     def __init__(self):
             self.set_up()
-            self.endMessage = ""
+            self.end_message = ""
             self.start()
 
     def set_up(self):
@@ -21,7 +21,7 @@ class Game():
         self.board = Board (rows, cols)
         self.rounds = rounds
         reference = rows*cols
-        if (reference > 16):
+        if (reference > 4):
             number_ships = random.randint(reference/3,reference/2)
         else:
             number_ships = random.randint(1, min(rows, cols))
@@ -49,7 +49,7 @@ class Game():
               self.end_message = "Congratulations! ;D"
               return True
           else:
-              self.endMessage = "Game Over! :("
+              self.end_message = "Game Over! :("
           return False
 
     def start(self):
